@@ -15,7 +15,7 @@ double hit_sphere(const point3& center, double radius, const ray& r)
     auto h = dot(r.direction(), oc);
     //auto b = -2.0 * dot(r.direction(), oc); //b = -2d(C-Q)
     auto c = oc.length_squared() - radius * radius; //c = (C-Q).(C-Q) - r^2
-    auto discriminant = h * h - 4 * a * c;
+    auto discriminant = h * h -  a * c;
     if (discriminant < 0) 
     {
         return -1.0;

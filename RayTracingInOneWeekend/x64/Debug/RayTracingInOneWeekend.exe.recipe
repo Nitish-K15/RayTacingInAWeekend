@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\VS\RaytracingInOneWeekend\x64\Debug\RayTracingInOneWeekend.exe</FullPath>
+      <FullPath>D:\RayTacingInAWeekend\x64\Debug\RayTracingInOneWeekend.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
