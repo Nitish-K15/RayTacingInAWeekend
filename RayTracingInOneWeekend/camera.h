@@ -5,6 +5,8 @@
 
 #include "hittable.h"
 
+#include "material.h"
+
 class camera {
 public:
     double aspect_ratio = 1.0;  // Ratio of image width over height
@@ -104,8 +106,11 @@ private:
 
         hit_record rec;
         if (world.hit(r, interval(0.001, infinity), rec)) {
-            vec3 direction = rec.normal + random_unit_vector();
-            return 0.5 * ray_color(ray(rec.p, direction),depth-1,world);
+            ray scattered;
+            color attentuation;
+            if (rec.mat->scatter(r, rec, attentuation, scattered))
+                return attentuation * ray_color(scattered, depth - 1, world);
+            return color(0, 0, 0);
         }
         //if (hit_sphere(point3(0, 0, -1), 0.5, r)) {
         //    return color(1, 0, 0);
