@@ -1,2 +1,3 @@
 ﻿  RayTracingInOneWeekend.cpp
-  RayTracingInOneWeekend.vcxproj -> D:\VS\RaytracingInOneWeekend\x64\Debug\RayTracingInOneWeekend.exe
+D:\RayTacingInAWeekend\RayTracingInOneWeekend\RayTracingInOneWeekend.cpp(17,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  RayTracingInOneWeekend.vcxproj -> D:\RayTacingInAWeekend\x64\Debug\RayTracingInOneWeekend.exe

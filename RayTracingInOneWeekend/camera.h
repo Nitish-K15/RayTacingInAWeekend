@@ -1,11 +1,14 @@
 #ifndef CAMERA_H
 #define CAMERA_H
+#include "stb_image_write.h"
 
 #include "rtweekend.h"
 
 #include "hittable.h"
 
 #include "material.h"
+
+#include <vector>
 
 class camera {
 public:
@@ -34,7 +37,11 @@ public:
                     ray r = get_ray(i, j);
                     pixel_color += ray_color(r,max_depth,world);
                 }
-                write_color(std::cout, pixel_samples_scale * pixel_color);
+                color final_color = write_color(std::cout, pixel_samples_scale * pixel_color);
+                int index = ((image_width * j) + i) * 3;
+                image_data[index] = static_cast<unsigned char>(final_color.x());
+                image_data[index + 1] = static_cast<unsigned char>(final_color.y());
+                image_data[index + 2] = static_cast<unsigned char>(final_color.z());
 
                 //auto pixel_center = pixel00_loc + (i * pixel_delta_u) + (j * pixel_delta_v);
                 //auto ray_direction = pixel_center - center;
@@ -48,6 +55,7 @@ public:
         }
 
         std::clog << "\rDone   ";
+        stbi_write_jpg("image.jpg", image_width, image_height, 3,image_data.data(), 100);
 	}
 
 private:
@@ -61,9 +69,13 @@ private:
     vec3   defocus_disk_u;       // Defocus disk horizontal radius
     vec3   defocus_disk_v;       // Defocus disk vertical radius
 
+    std::vector<unsigned char> image_data;
+
     void initialize() {
         image_height = int(image_width / aspect_ratio);
         image_height = (image_height < 1) ? 1 : image_height;
+
+        image_data.resize(image_width * image_height * 3);
         
         pixel_samples_scale = 1.0 / samples_per_pixel;
 

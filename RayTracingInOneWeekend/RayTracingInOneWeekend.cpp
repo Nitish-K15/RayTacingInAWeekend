@@ -5,12 +5,16 @@
 #include "hittable_list.h"
 #include "material.h"
 #include "sphere.h"
+#include "time.h"
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
 
 int main() {
     hittable_list world;
 
     auto ground_material = make_shared<lambertian>(color(0.5, 0.5, 0.5));
     world.add(make_shared<sphere>(point3(0, -1000, 0), 1000, ground_material));
+    srand(time(NULL));
 
     for (int a = -11; a < 11; a++) {
         for (int b = -11; b < 11; b++) {
@@ -54,9 +58,9 @@ int main() {
     camera cam;
 
     cam.aspect_ratio = 16.0 / 9.0;
-    cam.image_width = 400;
+    cam.image_width = 1200;
     cam.samples_per_pixel = 100;
-    cam.max_depth = 10;
+    cam.max_depth = 50;
 
     cam.vfov = 20;
     cam.lookfrom = point3(13, 2, 3);
